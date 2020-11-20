@@ -15,7 +15,7 @@
 	function doExport() {
 		var item;
 		while(item = Zotero.nextItem()) {
-			var date = new Date(item.date).getFullYear()
+			var date = Zotero.Utilities.strToDate(item.date).year;
 	
 			var year = date && !isNaN(date) ? date + ". " : (typeof item.date == 'undefined'?  "" : item.date + ". ");
 			var library_id = item.libraryID ? item.libraryID : "";
@@ -23,7 +23,7 @@
 			var title = item.title ? "*" + item.title + "*" : "";
 			var key = item.key;
 	
-			Zotero.write(`[${author_lastname}${year}${title}](zotero://select/items/${library_id}_${key})`)
+			Zotero.write(`[${author_lastname}${year}${title}](zotero://select/items/${library_id}_${key})`);
 		}
 	}
 	
